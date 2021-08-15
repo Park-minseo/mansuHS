@@ -13,6 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MansuHS">
         <activity
+            android:name=".subjectimer"
+            android:exported="true" />
+        <activity
+            android:name=".examtimer"
+            android:exported="true" />
+        <activity
+            android:name=".mockexamtimer"
+            android:exported="true" />
+        <activity
             android:name=".timetable"
             android:exported="true" />
         <activity
@@ -41,7 +50,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
