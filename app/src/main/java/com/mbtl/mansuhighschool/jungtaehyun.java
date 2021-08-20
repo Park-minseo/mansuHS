@@ -6,9 +6,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import java.io.IOException;
+import java.util.Calendar;
 import androidx.appcompat.app.AppCompatDelegate;
 
 
@@ -35,6 +35,11 @@ public class jungtaehyun extends AppCompatActivity {
         });
     }
     int a = 1;
+    Calendar now = Calendar.getInstance();
+    int year = now.get(Calendar.YEAR);
+    int month = now.get(Calendar.MONTH) + 1;
+    int day = now.get(Calendar.DAY_OF_MONTH);
+
     private void getWebsite(){
         Document doc = null;
 
@@ -43,8 +48,17 @@ public class jungtaehyun extends AppCompatActivity {
             public void run() {
                 final StringBuilder builder = new StringBuilder();
                 try {
-
-                    Document doc = Jsoup.connect("https://news.naver.com/main/list.naver?mode=LS2D&sid2=250&sid1=102&mid=shm&date=20210820&page=" + a).get();
+                    String m = " ";
+                    String d = " ";
+                    if (month < 10) {
+                        m = "0" + month;
+                    }
+                    else m = String.valueOf(month);
+                    if (day < 10){
+                        d = "0" + day;
+                    }
+                    else d = String.valueOf(day);
+                    Document doc = Jsoup.connect("https://news.naver.com/main/list.naver?mode=LS2D&sid2=250&sid1=102&mid=shm&date=" + year + m + d + "&page=" + a).get();
 
 //                    Elements title = doc.select("a");
                     Elements content = doc.select("span.lede");
