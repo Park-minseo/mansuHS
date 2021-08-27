@@ -14,6 +14,18 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.MansuHS">
         <activity
+            android:name=".calculator3"
+            android:exported="true" />
+        <activity
+            android:name=".calculator2"
+            android:exported="true" />
+        <activity
+            android:name=".calculator1"
+            android:exported="true" />
+        <activity
+            android:name=".calculator"
+            android:exported="true" />
+        <activity
             android:name=".subjectimer"
             android:exported="true" />
         <activity
