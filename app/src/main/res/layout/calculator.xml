@@ -63,8 +63,9 @@
     <TextView
         android:id="@+id/value"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_marginTop="50dp"
+        android:gravity="center_horizontal|left|center_vertical"
         android:text="값:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/putvalue3LL" />
