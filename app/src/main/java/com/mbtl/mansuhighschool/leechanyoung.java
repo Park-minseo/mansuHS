@@ -16,8 +16,11 @@ public class leechanyoung extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.leechanyoung);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);//핸드폰이 다크모드여도 앱 배경 안변하게 함
+
         Button gongji = findViewById(R.id.button1_lcy);
         Button gajung = findViewById(R.id.button2_lcy);
+        Button haksa = findViewById(R.id.button3_lcy);
+
         gongji.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
@@ -36,5 +39,13 @@ public class leechanyoung extends AppCompatActivity {
 
             }
         });
+
+        haksa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://ims.icehs.kr/schdList.do?m=0414&s=ims"));
+                startActivity(intent);
+            }
+        });
+        }
     }
-}
