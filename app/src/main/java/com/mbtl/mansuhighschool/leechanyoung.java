@@ -1,6 +1,7 @@
 package com.mbtl.mansuhighschool;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,15 +21,17 @@ public class leechanyoung extends AppCompatActivity {
         gongji.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                Intent intent = new Intent(getApplicationContext(), gongji.class);
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://ims.icehs.kr/boardCnts/list.do?boardID=21715&m=0401&s=ims"));
                 startActivity(intent);
+
+
 
             }
         });
         gajung.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                Intent intent = new Intent(getApplicationContext(), gajung.class);
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://ims.icehs.kr/boardCnts/list.do?boardID=21716&m=0402&s=ims"));
                 startActivity(intent);
 
             }
