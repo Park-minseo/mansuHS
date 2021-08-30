@@ -1,5 +1,6 @@
 package com.mbtl.mansuhighschool;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.widget.TextView;
@@ -30,6 +31,18 @@ public class time1 extends AppCompatActivity {
         setContentView(R.layout.time1);
         String day = getTime();
         String year = day.substring(0,4);
+
+        String grade = null;
+        String classroom = null;
+        String classrooms = null;
+
+        Intent intent = getIntent();
+        grade = intent.getStringExtra("학년");
+        classroom = intent.getStringExtra("반");
+
+        if(classroom!="10"){
+            classrooms = "0" + classroom;
+        }
 
         StrictMode.enableDefaults();
         TextView status1 = (TextView)findViewById(R.id.result);

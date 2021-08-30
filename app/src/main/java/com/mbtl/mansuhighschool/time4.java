@@ -55,7 +55,7 @@ public class time4 extends AppCompatActivity {
         try{
             URL url = new URL("https://open.neis.go.kr/hub/hisTimetable?KEY=96ccdda702004f19b91eb5dee7fb038c&ATPT_OFCDC_SC_CODE=E10&SD_SCHUL_CODE=7310332&AY="
                     + year + "&DGHT_CRSE_SC_NM=%EC%A3%BC%EA%B0%84&ORD_SC_NM=%EC%9D%BC%EB%B0%98%EA%B3%84&DDDEP_NM=7%EC%B0%A8%EC%9D%BC%EB%B0%98&GRADE="
-                    + 2 + "&CLRM_NM" + 05 + "&CLASS_NM=" + 5 + "&TI_FROM_YMD=" + day1 + "&TI_TO_YMD=" + day1
+                    + grade + "&CLRM_NM" + 05 + "&CLASS_NM=" + 5 + "&TI_FROM_YMD=" + day1 + "&TI_TO_YMD=" + day1
             ); //검색 URL부분
 
             XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
