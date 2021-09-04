@@ -16,7 +16,7 @@ import android.widget.Toast;
 public class subjectimer extends AppCompatActivity {
 
     private Button mStartBtn, mStopBtn, mRecordBtn, mPauseBtn;
-    private TextView mTimeTextView, mRecordTextView;
+    private TextView mTimeTextView, mRecordTextView, mRecordTextDifView;
     private Thread timeThread = null;
     private Boolean isRunning = true;
 
@@ -35,6 +35,7 @@ public class subjectimer extends AppCompatActivity {
         mPauseBtn = (Button) findViewById(R.id.btn_pause);
         mTimeTextView = (TextView) findViewById(R.id.timeView);
         mRecordTextView = (TextView) findViewById(R.id.recordView);
+        mRecordTextDifView =  (TextView) findViewById(R.id.recorddifView);
 
         mStartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +44,7 @@ public class subjectimer extends AppCompatActivity {
                 mStopBtn.setVisibility(View.VISIBLE);
                 mRecordBtn.setVisibility(View.VISIBLE);
                 mPauseBtn.setVisibility(View.VISIBLE);
+                isRunning = true;
 
                 timeThread = new Thread(new timeThread());
                 timeThread.start();
@@ -57,6 +59,7 @@ public class subjectimer extends AppCompatActivity {
                 mStartBtn.setVisibility(View.VISIBLE);
                 mPauseBtn.setVisibility(View.GONE);
                 mRecordTextView.setText("");
+                mRecordTextDifView.setText("");
                 timeThread.interrupt();
             }
         });
@@ -64,7 +67,29 @@ public class subjectimer extends AppCompatActivity {
         mRecordBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mRecordTextView.setText(mRecordTextView.getText() + mTimeTextView.getText().toString() + "\n");
+                if (mRecordTextView.getText().toString().length() < 2){
+                    mRecordTextDifView.setText("00:00:00:00");
+                } else{
+                    String mcaluculate = mTimeTextView.getText().toString().replace(":","");
+                    int mH = Integer.parseInt(mcaluculate.substring(0,2));
+                    int mM = Integer.parseInt(mcaluculate.substring(2,4));
+                    int mS = Integer.parseInt(mcaluculate.substring(4,6));
+                    int ms = Integer.parseInt(mcaluculate.substring(6,8));
+                    int mresult = ms + mS*100 + mM*6000 + mH*36000;
+                    String mStack = mRecordTextView.getText().toString().substring(0,11).replace(":","");
+                    mH = Integer.parseInt(mStack.substring(0,2));
+                    mM = Integer.parseInt(mStack.substring(2,4));
+                    mS = Integer.parseInt(mStack.substring(4,6));
+                    ms = Integer.parseInt(mStack.substring(6,8));
+                    mresult =  mresult - (ms + mS*100 + mM*6000 + mH*36000);
+                    ms = mresult  % 100;
+                    mS = (mresult / 100) % 60;
+                    mM = (mresult  / 100) / 60 % 60;
+                    mH = (mresult  / 100) / 3600;
+                    mcaluculate = String.format("%02d:%02d:%02d:%02d", mH, mM, mS, ms);
+                    mRecordTextDifView.setText(mcaluculate + "\n" + mRecordTextDifView.getText());
+                }
+                mRecordTextView.setText(mTimeTextView.getText().toString()+"\n"+mRecordTextView.getText());
             }
         });
 
@@ -87,14 +112,11 @@ public class subjectimer extends AppCompatActivity {
         public void handleMessage(Message msg) {
             int mSec = msg.arg1 % 100;
             int sec = (msg.arg1 / 100) % 60;
-            int min = (msg.arg1 / 100) / 60;
-            int hour = (msg.arg1 / 100) / 360;
+            int hour = (msg.arg1 / 100) / 3600;
+            int min = (msg.arg1 / 100) / 60 % 60;
             //1000이 1초 1000*60 은 1분 1000*60*10은 10분 1000*60*60은 한시간
 
             @SuppressLint("DefaultLocale") String result = String.format("%02d:%02d:%02d:%02d", hour, min, sec, mSec);
-            if (result.equals("00:01:15:00")) {
-                Toast.makeText(subjectimer.this, "1분 15초가 지났습니다.", Toast.LENGTH_SHORT).show();
-            }
             mTimeTextView.setText(result);
         }
     };
@@ -119,6 +141,7 @@ public class subjectimer extends AppCompatActivity {
                             public void run() {
                                 mTimeTextView.setText("");
                                 mTimeTextView.setText("00:00:00:00");
+
                             }
                         });
                         return; // 인터럽트 받을 경우 return
