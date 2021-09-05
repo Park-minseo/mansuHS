@@ -55,7 +55,7 @@
         <entry key="..\:/Users/user/Programming/mansuhighschool/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/user/Programming/mansuhighschool/app/src/main/res/layout/calculator.xml" value="0.25" />
         <entry key="..\:/Users/user/Programming/mansuhighschool/app/src/main/res/layout/choisoonjoo.xml" value="0.1" />
-        <entry key="..\:/Users/user/Programming/mansuhighschool/app/src/main/res/layout/examtimer.xml" value="0.1778115501519757" />
+        <entry key="..\:/Users/user/Programming/mansuhighschool/app/src/main/res/layout/examtimer.xml" value="0.22" />
         <entry key="..\:/Users/user/Programming/mansuhighschool/app/src/main/res/layout/leechanyoung.xml" value="0.2046875" />
         <entry key="..\:/Users/user/Programming/mansuhighschool/app/src/main/res/layout/leejaewoo.xml" value="0.33" />
         <entry key="..\:/Users/user/Programming/mansuhighschool/app/src/main/res/layout/lunch.xml" value="0.1897644927536232" />
@@ -69,7 +69,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_15_PREVIEW" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

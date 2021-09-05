@@ -133,7 +133,7 @@ public class subjectimer extends AppCompatActivity {
                     handler.sendMessage(msg);
 
                     try {
-                        Thread.sleep(10);
+                        Thread.sleep(9);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                         runOnUiThread(new Runnable(){
