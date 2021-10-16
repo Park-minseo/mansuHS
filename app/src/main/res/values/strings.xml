@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">mansuHS</string>
+    <string name="app_name">인천만수고등학교</string>
     <string name="error">We cannot find this image</string>
     <string name="error2">We cannot find this image</string>
     <string name="title_activity_tabletime">tabletime</string>

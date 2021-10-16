@@ -3,14 +3,17 @@
     package="com.mbtl.mansuhighschool">
 
     <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
         android:name=".var"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_main"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_main_round"
+        android:supportsRtl="true"
         android:theme="@style/Theme.MansuHS"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".dev"
+            android:exported="true" />
         <activity
             android:name=".time5"
             android:exported="true" />
@@ -84,8 +87,8 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>
