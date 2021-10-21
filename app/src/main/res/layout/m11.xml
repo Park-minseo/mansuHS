@@ -38,11 +38,29 @@
         tools:layout_editor_absoluteX="252dp"
         tools:layout_editor_absoluteY="592dp" />
 
+    <Button
+        android:id="@+id/direction_left"
+        android:layout_width="95dp"
+        android:layout_height="90dp"
+        android:text="왼쪽"
+        android:textSize="20dp"
+        tools:layout_editor_absoluteX="65dp"
+        tools:layout_editor_absoluteY="592dp" />
+
+    <Button
+        android:id="@+id/backward"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:text="뒤"
+        android:textSize="30dp"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="643dp" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="483dp"
         android:layout_height="638dp"
-        android:src="@drawable/m1"
+        android:src="@drawable/m11"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="16dp" />
 

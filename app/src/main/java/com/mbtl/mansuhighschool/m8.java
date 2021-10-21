@@ -8,7 +8,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
-public class yooyoungbin extends AppCompatActivity {
+public class m8 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,12 +18,13 @@ public class yooyoungbin extends AppCompatActivity {
 
         Button upward = findViewById(R.id.upward);
         Button direction_right = findViewById(R.id.direction_right);
-
+        Button direction_left = findViewById(R.id.direction_left);
+        Button backward = findViewById(R.id.backward);
 
         upward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), m2.class);
+                Intent intent = new Intent(getApplicationContext(), m9.class);
                 startActivity(intent);
 
             }
@@ -32,7 +33,24 @@ public class yooyoungbin extends AppCompatActivity {
         direction_right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), m14.class);
+                startActivity(intent);
+            }
+        });
+
+        direction_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), m2.class);
+                startActivity(intent);
+            }
+        });
+
+        backward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), m7.class);
+                startActivity(intent);
             }
         });
     }

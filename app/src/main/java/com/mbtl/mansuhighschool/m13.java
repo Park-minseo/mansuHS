@@ -8,7 +8,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
-public class yooyoungbin extends AppCompatActivity {
+public class m13 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,23 +17,29 @@ public class yooyoungbin extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);//핸드폰이 다크모드여도 앱 배경 안변하게 함
 
         Button upward = findViewById(R.id.upward);
-        Button direction_right = findViewById(R.id.direction_right);
+
+        Button direction_left = findViewById(R.id.direction_left);
 
 
         upward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), m2.class);
+                Intent intent = new Intent(getApplicationContext(), m14.class);
                 startActivity(intent);
 
             }
         });
 
-        direction_right.setOnClickListener(new View.OnClickListener() {
+
+
+        direction_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), m7.class);
+                startActivity(intent);
             }
         });
+
+
     }
 }
