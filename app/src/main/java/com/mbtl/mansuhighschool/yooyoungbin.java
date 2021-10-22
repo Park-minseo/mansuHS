@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -12,6 +13,9 @@ import androidx.appcompat.app.AppCompatDelegate;
 public class yooyoungbin extends AppCompatActivity {
 
     int i = 1;
+    public void print(){
+        Toast.makeText(getApplicationContext(), "이동할 수 없습니다.", Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +29,7 @@ public class yooyoungbin extends AppCompatActivity {
         Button down = findViewById(R.id.down);
         Button left = findViewById(R.id.left);
         ImageView img = (ImageView)findViewById(R.id.image);
-        int[] images = new int[25];
+        int[] images = new int[26];
         images[1] = R.drawable.m1;
         images[2] = R.drawable.m2;
         images[3] = R.drawable.m3;
@@ -50,36 +54,78 @@ public class yooyoungbin extends AppCompatActivity {
         images[22] = R.drawable.m22;
         images[23] = R.drawable.m23;
         images[24] = R.drawable.m24;
+        images[25] = R.drawable.m25;
 
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int m = i / 6;
+                int m = i % 6;
                 if(m != 0){
+                    if(i==25){
+                        print();
+                    }
+                    else{
+                        i += 1;
+                        img.setImageResource(images[i]);
+                    }
+                }
+                else if(i == 18){
                     i += 1;
                     img.setImageResource(images[i]);
-                    Log.i("d",""+i);
+                }
+                else if(i == 24) {
+                    i += 1;
+                    img.setImageResource(images[i]);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "이동할 수 없습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
         down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int m = i / 6;
+                int m = i % 6;
                 if(m != 1){
+                    if(i==1){
+                        Toast.makeText(getApplicationContext(), "이동할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(i==13){
+                        Toast.makeText(getApplicationContext(), "이동할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(i==7){
+                        Toast.makeText(getApplicationContext(), "이동할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        i -= 1;
+                        img.setImageResource(images[i]);
+                        Log.i("d", "" + i);
+                    }
+                }
+                else if(i == 19){
                     i -= 1;
                     img.setImageResource(images[i]);
-                    Log.i("d",""+i);
                 }
+                else if(i == 25) {
+                    i -= 1;
+                    img.setImageResource(images[i]);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "이동할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(i <=18){
+                if(i <=12){
                     i += 6;
                     img.setImageResource(images[i]);
                     Log.i("d",""+i);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "이동할 수 없습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -87,9 +133,17 @@ public class yooyoungbin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(i>=7){
-                    i -= 6;
-                    img.setImageResource(images[i]);
-                    Log.i("d",""+i);
+                    if(i<=18){
+                        i -= 6;
+                        img.setImageResource(images[i]);
+                        Log.i("d",""+i);
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "이동할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "이동할 수 없습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
