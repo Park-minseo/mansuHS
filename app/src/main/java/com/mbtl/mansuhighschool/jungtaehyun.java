@@ -126,6 +126,8 @@ public class jungtaehyun extends AppCompatActivity {
                         String Content12 = Content123.replace("</span>","");
                         String[] Content1234 = Content12.split("<span class=\"lede\">");
                         //간략 내용 관련
+                            try {
+
 
                             for (i = 0, asdf = 1, img = 2; i <= 19; i++, asdf = asdf + 1, img++) {  //이거 아예 다시 해야함
                                 String img_title = install[i];
@@ -158,7 +160,9 @@ public class jungtaehyun extends AppCompatActivity {
                                     {
                                         day = 29;
                                         month = month-1;
+                                        getWebsite();
                                     }
+                                    getWebsite();
                                 }
                                 check = imgreal;
                                 String contentsp = Content1234[asdf];
@@ -167,9 +171,13 @@ public class jungtaehyun extends AppCompatActivity {
                                 String fax = newstitle[1];
                                 MainData mainData = new MainData(imgreal, fax, contentreal[0],link);
                                 arrayList.add(mainData);
-                                mainAdapter.notifyDataSetChanged();
+                                mainAdapter.notifyDataSetChanged();}
                             }
-
+                                catch (ArrayIndexOutOfBoundsException e)
+                                {
+//                                    check = imgreal;
+                                    getWebsite();
+                                }
 
                         }
 
