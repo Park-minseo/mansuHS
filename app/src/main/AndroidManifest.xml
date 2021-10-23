@@ -12,6 +12,9 @@
         android:theme="@style/Theme.MansuHS"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".calculator4"
+            android:exported="true" />
+        <activity
             android:name=".dev"
             android:exported="true" />
         <activity
@@ -31,9 +34,6 @@
             android:exported="true" />
         <activity
             android:name=".time"
-            android:exported="true" />
-        <activity
-            android:name=".calculator4"
             android:exported="true" />
         <activity
             android:name=".calculator3"
