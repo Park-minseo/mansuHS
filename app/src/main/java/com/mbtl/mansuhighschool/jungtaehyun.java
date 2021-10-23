@@ -1,6 +1,5 @@
 package com.mbtl.mansuhighschool;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.icu.text.CaseMap;
 import android.media.Image;
 import android.os.Bundle;
@@ -18,17 +17,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.widget.ImageViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.squareup.picasso.Picasso;
 
-
 public class jungtaehyun extends AppCompatActivity {
-
     private ArrayList<MainData>arrayList;
     private MainAdapter mainAdapter;
     private RecyclerView recyclerView;
@@ -38,7 +35,6 @@ public class jungtaehyun extends AppCompatActivity {
     TextView result;
     TextView resultTitle;
     ImageView imgview;
-    ImageView iv_profile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,19 +51,18 @@ public class jungtaehyun extends AppCompatActivity {
         mainAdapter = new MainAdapter(arrayList);
         recyclerView.setAdapter(mainAdapter);
 
+
+
+        // 필요한거
         resultTitle = (TextView)findViewById(R.id.resultTitle);
         result = (TextView)findViewById(R.id.result);
         getBtn = (Button) findViewById(R.id.getBtn);
         imgview = findViewById(R.id.imgview);
-        iv_profile = findViewById(R.id.iv_profile);
 
         getBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 getWebsite();
-
             }
         });
     }
@@ -99,16 +94,13 @@ public class jungtaehyun extends AppCompatActivity {
                     else d = String.valueOf(day);
                     Document doc = Jsoup.connect("https://news.naver.com/main/list.naver?mode=LS2D&sid2=250&sid1=102&mid=shm&date=" + year + m + d + "&page=" + a).get();
 
-                    Object title = doc.select("a");
-                    Object content = doc.select("span.lede");
-                    Object newsimg = doc.select("img");
+                    Object title = doc.select("body > div > table > tbody > tr > td > div > div > ul > li > dl > dt >a");
+                    Object content = doc.select("body > div > table > tbody > tr > td > div > div > ul > li > dl > dd > span");
 
                     builderT.append(title).append("\n");
                     builderC.append(content).append("\n");
-                    builderI.append(newsimg).append("\n");
 
                     a = a+1;
-
 
                 } catch (IOException e) {
                     builderT.append("Error").append(e.getMessage()).append("\n");
@@ -117,52 +109,74 @@ public class jungtaehyun extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        String newsimgs = builderI.toString();
+
                         String Title = builderT.toString();
                         String Content = builderC.toString();
-                        String result1 = Content.replace("</span>","");
-                        String[] result2 = result1.split("<span class=\"lede\">");
-//                        String[] resultT = Title.split("</a>");
-                        String[] resultlink = Title.split("https://");
 
-                        String newsimg = newsimgs.replace("<img src=\"","");
-                        String[] news_imgs = newsimg.split("\" width=\"");
-
-//                        resultTitle.setText(Title);  //이 부분 많은 수정 필요  홀수가 링크 나옴
-                        int img = 2;    //2부터 1간격
-                        int i = 18;  //18에 1번째  22에서 2번째 4간격
+                        int img = 2;
+                        int i = 18;
                         int asdf= 1;
 
+                        String Title1 = Title.replace("\n","");
+                        String title123 = Title1.replace(".png';\"> </a>","");
+                        String title1212 = title123.replace("\"> <img","");
+                        String[] install = title1212.split("</a>");
+                        //타이틀 관련
 
 
+                        String Content123 = Content.replace("\n","");
+                        String Content12 = Content123.replace("</span>","");
+                        String[] Content1234 = Content12.split("<span class=\"lede\">");
+                        //간략 내용 관련
 
+                        try {
+                            for (i = 0, asdf = 1, img = 2; i <= 19; i++, asdf = asdf + 1, img++) {  //이거 아예 다시 해야함
+                                String img_title = install[i];
+                                String[] newstitle = img_title.split("\">");
+                                //타이틀 관련
+                                String img12 = "";
+                                String imgreal = "error";
+                                String[] img1 = {};
+                                String link;
+                                try {
+                                    img1 = img_title.split("src=\"https://");   //이거 잠시 빼옴
+                                    img12 = img1[1];
+                                    String[] img123 = img12.split(".jpg?");
+                                    imgreal = "https://" + img123[0] + ".jpg";
+                                     link = img1[0].replace("<a href=\"","");       // 사진이 있을 경우의 본문 링크
+                                } catch (ArrayIndexOutOfBoundsException e) {
+                                     link = img1[0].replace("<a href=\"","");
+                                    String[] bon_moon = link.split("\">");
+                                    link = bon_moon[0];                                             // 사진이 없을 경우의 본문 링크
+                                    imgreal = "https://imgnews.pstatic.net/image/origin/022/2021/10/22/3630904.jpg";//이거 없는 이미지 설정하삼
+                                }
 
-                        for(i=18,asdf=1,img=2;i<=97;i=i+4,asdf++,img++){
-                            String imgone = news_imgs[img]; //2부터 사진이 안들어가면 한칸씩 밀림
-                            String[] imgtwo = imgone.split("\">\nhttps://");
-                            String imgreal = "https://" + imgtwo[1];
-                            String rt = resultlink[i];
-                            rt = rt.replace("</a>", "");
-                            rt = rt.replace("<a href=\"", "");
-                            rt = rt.replace("\n", "");
+                                String contentsp = Content1234[asdf];
+                                String[] contentreal = contentsp.split("<span class=\"writing\">");
+                                //간략 내용 관련
+                                String fax = newstitle[1];
 
-                            String[] result_link = rt.split("\">");
-                            String link = "https://" + result_link[0];
-//                        resultTitle.setText("https://" + result_link[0]);  //링크
-//                            result.setText(result_link[1]);  //타이틀
-//                            resultTitle.setText(result2[asdf]);  //완성 1 부터 간략 내용 나옴 1간격
-                            String fax = result_link[1];    //타이틀
-                            MainData mainData = new MainData(R.mipmap.ic_launcher, fax, result2[asdf]);
-                            arrayList.add(mainData);
-                            mainAdapter.notifyDataSetChanged();
-//                            Picasso.get().load(imgreal).into(imgview);
-//                            resultTitle.setText(resultlink[78]);
-//                            result.setText(imgreal);
+                                MainData mainData = new MainData(R.mipmap.ic_launcher, fax, contentreal[0],link);
 
-
+                                arrayList.add(mainData);
+                                mainAdapter.notifyDataSetChanged();
+//                            resultTitle.setText(link); //테스트용
+                            }
                         }
-                        //할일 : 사진 받아오기 , 영상 보면 롱클릭 리스너로 webview 통해서 링크 연결하기
-//                    result
+                        catch (ArrayIndexOutOfBoundsException e)
+                        {
+                            a=1;
+                            if (day > 1){
+                                day = day-1;
+                            }
+                            else
+                                {
+                                    month = month-1;
+                                }
+                            getWebsite();
+                        }
+                        //할일 : 사진 받아오기 , 영상 보고 롱클릭 리스너로 webview 통해서 링크 연결하기
+                        //context 오류남 영상보고 어댑터 고쳐야 할 듯
                     }
 
                 });

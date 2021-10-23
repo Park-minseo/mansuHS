@@ -1,24 +1,31 @@
 package com.mbtl.mansuhighschool;
 
+import android.content.Context;
+
 public class MainData {
 
     private int iv_profile;
     private String tv_name;
     private String tv_content;
+    private String bon_moon;
+//    private Context context;
 
-    public MainData(int iv_profile, String tv_name, String tv_content) {
+    public MainData(int iv_profile, String tv_name, String tv_content , String bon_moon) {
         this.iv_profile = iv_profile;
         this.tv_name = tv_name;
         this.tv_content = tv_content;
+        this.bon_moon = bon_moon;
+//        this.context = context;
     }
 
-    public int getIv_profile() {
-        return iv_profile;
-    }
+//    public Context getContext() { return context; }
 
-    public void setIv_profile(int iv_profile) {
-        this.iv_profile = iv_profile;
-    }
+//    public void setContext(String iv_profile) { this.context = context; }
+
+
+    public int getIv_profile() { return iv_profile; }
+
+    public void setIv_profile(int iv_profile) { this.iv_profile = iv_profile; }
 
     public String getTv_name() {
         return tv_name;
@@ -34,5 +41,14 @@ public class MainData {
 
     public void setTv_content(String tv_content) {
         this.tv_content = tv_content;
+    }
+
+
+    public String getBon_moon() {
+            return bon_moon;
+    }
+
+    public void setBon_moon(String bon_moon) {
+        this.bon_moon = bon_moon;
     }
 }
