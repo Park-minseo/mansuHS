@@ -80,8 +80,8 @@ public class jungtaehyun extends AppCompatActivity {
                 StringBuilder builderC = new StringBuilder();
                 StringBuilder builderI = new StringBuilder();
                 try {
-                    String m = " ";
-                    String d = " ";
+                    String m = "";
+                    String d = "";
                     if (month < 10) {
                         m = "0" + month;
                     }
@@ -90,7 +90,7 @@ public class jungtaehyun extends AppCompatActivity {
                         d = "0" + day;
                     }
                     else d = String.valueOf(day);
-                    Document doc = Jsoup.connect("https://news.naver.com/main/list.naver?mode=LS2D&sid2=250&sid1=102&mid=shm&date=" + year + m + d + "&page=" + a).get();
+                    Document doc = Jsoup.connect("https://news.naver.com/main/list.naver?mode=LS2D&sid2=250&sid1=102&mid=shm&date=" + year + m + 16 + "&page=" + a).get();
 
                     Object title = doc.select("body > div > table > tbody > tr > td > div > div > ul > li > dl > dt >a");
                     Object content = doc.select("body > div > table > tbody > tr > td > div > div > ul > li > dl > dd > span");
@@ -148,7 +148,7 @@ public class jungtaehyun extends AppCompatActivity {
                                     String[] bon_moon = link.split("\">");
                                     link = bon_moon[0];                                             // 사진이 없을 경우의 본문 링크
                                     link = link.replace("amp;","");
-                                    imgreal = "https://imgnews.pstatic.net/image/origin/022/2021/10/22/3630904.jpg";//이거 없는 이미지 설정하삼
+                                    imgreal = "";//이거 없는 이미지 설정하삼
                                 }
 
                                 String contentsp = Content1234[asdf];
@@ -172,8 +172,6 @@ public class jungtaehyun extends AppCompatActivity {
                                 }
                             getWebsite();
                         }
-                        //할일 : 사진 받아오기 , 영상 보고 롱클릭 리스너로 webview 통해서 링크 연결하기
-                        //context 오류남 영상보고 어댑터 고쳐야 할 듯
                     }
 
                 });
