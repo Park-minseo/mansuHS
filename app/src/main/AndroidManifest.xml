@@ -14,6 +14,9 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.MansuHS">
         <activity
+            android:name=".calculator4"
+            android:exported="true" />
+        <activity
             android:name=".calculator3"
             android:exported="true" />
         <activity
