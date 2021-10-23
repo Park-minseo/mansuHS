@@ -19,18 +19,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.CustomViewHolder> {
-
+    Context context;
     private ArrayList<MainData> arrayList;
 
     public MainAdapter(ArrayList<MainData> arrayList) {
         this.arrayList = arrayList;
-    }
 
+    }
+    public MainAdapter(Context context11)
+    {
+        context = context11;
+    }
     @NonNull
     @Override
-    public MainAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-
+//        Fresco.initialize(parent.getContext());          // 이거를 해야 링크를 이미지로 변환 가능
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list,parent,false);
         CustomViewHolder holder = new CustomViewHolder(view);
@@ -41,13 +45,15 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.CustomViewHold
     @Override
     public void onBindViewHolder(@NonNull final MainAdapter.CustomViewHolder holder, int position) {
 
-//        Fresco.initialize(arrayList.get(position).getContext());
+
 
         holder.tv_name.setText(arrayList.get(position).getTv_name());
         holder.tv_content.setText(arrayList.get(position).getTv_content());
         holder.bon_moon.setText(arrayList.get(position).getBon_moon());
-//        Uri uri = Uri.parse(arrayList.get(position).getIv_profile());
+
+//        Uri uri = Uri.parse(arrayList.get(position).getIv_profile()); // 링크를 이미지로 변형
 //        holder.iv_profile.setImageURI(uri);
+
 
         holder.itemView.setTag(position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -57,10 +63,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.CustomViewHold
                 Toast.makeText(v.getContext(),curName, Toast.LENGTH_SHORT).show();
 
 
-                String bon_moon = (String) holder.bon_moon.getText().toString();               // bonmoon 텍스트뷰 만들어서 여기에 본문 링크 넘겨주기.
+                String bon_moon = (String) holder.bon_moon.getText().toString();               // 여기에 본문 링크 넘겨주기.
                 Uri urI = Uri.parse(bon_moon);
-//                Intent intent = new Intent(context, urI);       // 아마도 context 맞을 듯
-//                startActivity(intent);//액티비티 이동
+                Intent intent = new Intent(Intent.ACTION_VIEW, urI);
+                v.getContext().startActivity(intent);
+//                context.startActivity(intent);        //액티비티 이동
 
             }
         });
@@ -78,7 +85,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.CustomViewHold
         protected TextView tv_name;
         protected TextView tv_content;
         protected TextView bon_moon;
-//        protected Context context;
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -86,11 +92,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.CustomViewHold
             this.tv_name = (TextView)  itemView.findViewById(R.id.tv_name);
             this.tv_content = (TextView)  itemView.findViewById(R.id.tv_content);
             this.bon_moon = (TextView) itemView.findViewById(R.id.bon_moon);
-
-
-
         }
     }
+
+
+
 }
 
 

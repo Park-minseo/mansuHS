@@ -33,7 +33,6 @@ public class jungtaehyun extends AppCompatActivity {
 
     Button getBtn;
     TextView result;
-    TextView resultTitle;
     ImageView imgview;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +51,8 @@ public class jungtaehyun extends AppCompatActivity {
         recyclerView.setAdapter(mainAdapter);
 
 
-
+        Fresco.initialize(this);
         // 필요한거
-        resultTitle = (TextView)findViewById(R.id.resultTitle);
         result = (TextView)findViewById(R.id.result);
         getBtn = (Button) findViewById(R.id.getBtn);
         imgview = findViewById(R.id.imgview);
@@ -144,10 +142,12 @@ public class jungtaehyun extends AppCompatActivity {
                                     String[] img123 = img12.split(".jpg?");
                                     imgreal = "https://" + img123[0] + ".jpg";
                                      link = img1[0].replace("<a href=\"","");       // 사진이 있을 경우의 본문 링크
+                                    link = link.replace("amp;","");
                                 } catch (ArrayIndexOutOfBoundsException e) {
                                      link = img1[0].replace("<a href=\"","");
                                     String[] bon_moon = link.split("\">");
                                     link = bon_moon[0];                                             // 사진이 없을 경우의 본문 링크
+                                    link = link.replace("amp;","");
                                     imgreal = "https://imgnews.pstatic.net/image/origin/022/2021/10/22/3630904.jpg";//이거 없는 이미지 설정하삼
                                 }
 
@@ -155,12 +155,9 @@ public class jungtaehyun extends AppCompatActivity {
                                 String[] contentreal = contentsp.split("<span class=\"writing\">");
                                 //간략 내용 관련
                                 String fax = newstitle[1];
-
-                                MainData mainData = new MainData(R.mipmap.ic_launcher, fax, contentreal[0],link);
-
+                                MainData mainData = new MainData(imgreal, fax, contentreal[0],link);
                                 arrayList.add(mainData);
                                 mainAdapter.notifyDataSetChanged();
-//                            resultTitle.setText(link); //테스트용
                             }
                         }
                         catch (ArrayIndexOutOfBoundsException e)
