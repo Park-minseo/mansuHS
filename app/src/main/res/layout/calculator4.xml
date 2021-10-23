@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".calculator4">
 
     <TextView
         android:id="@+id/textView6"
@@ -50,6 +51,7 @@
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:gravity="center"
+        android:hint="2"
         android:text="X² : "
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/input4"
@@ -63,7 +65,8 @@
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:gravity="center"
-        android:text="X :"
+        android:hint="1"
+        android:text="X : "
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/output"
         app:layout_constraintEnd_toEndOf="parent"
