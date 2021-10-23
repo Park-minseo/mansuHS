@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -45,7 +44,6 @@ public class lunch extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected (MenuItem item)
     {
-        Toast toast = Toast.makeText(getApplicationContext(),"", Toast.LENGTH_LONG);
 
         switch(item.getItemId())
         {
@@ -60,7 +58,6 @@ public class lunch extends AppCompatActivity {
                 break;
         }
 
-        toast.show();
 
         return super.onOptionsItemSelected(item);
     }
@@ -79,6 +76,8 @@ public class lunch extends AppCompatActivity {
         setContentView(R.layout.lunch);
         Log.i("오늘날짜", key);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);//핸드폰이 다크모드여도 앱 배경 안변하게 함
+
+
         StrictMode.enableDefaults();
         TextView status1 = (TextView)findViewById(R.id.result); //파싱된 결과확인!
 
@@ -145,7 +144,7 @@ public class lunch extends AppCompatActivity {
                 parserEvent = parser.next();
             }
         } catch(Exception e){
-            status1.setText("데이터를 불러올 수 없습니다.");
+            status1.setText("데이터를 불러올 수 없습니다. \n인터넷 연결을 확인해주세요.");
         }
 
 

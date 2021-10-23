@@ -1,4 +1,6 @@
 package com.mbtl.mansuhighschool;
+import android.annotation.SuppressLint;
+import android.media.Image;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -7,108 +9,205 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
 import java.util.Timer;
 import java.util.TimerTask;
 public class mockexamtimer extends AppCompatActivity {
     LinearLayout timeCountSettingLV, timeCountLV;
-    EditText hourET, minuteET, secondET;
-    TextView hourTV, minuteTV, secondTV, finishTV;
-    Button startBtn, pauseBtn, cancelBtn;
-    int hour, minute, second;
+    TextView hourTV, minuteTV, secondTV, finishTV, subject;
+    Button startBtn, stopBtn, pauseBtn;
+    ImageButton ko, ma, en, hi, so, sc;
+    private Thread timeThread = null;
+    private Boolean isRunning = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mockexamtimer);
+        ko = (ImageButton)findViewById(R.id.korean);
+        en = (ImageButton)findViewById(R.id.english);
+        ma = (ImageButton)findViewById(R.id.math);
+        hi = (ImageButton)findViewById(R.id.history);
+        so = (ImageButton)findViewById(R.id.society);
+        sc = (ImageButton)findViewById(R.id.science);
+        subject = (TextView)findViewById(R.id.subject);
         timeCountSettingLV = (LinearLayout)findViewById(R.id.timeCountSettingLV);
         timeCountLV = (LinearLayout)findViewById(R.id.timeCountLV);
-        hourET = (EditText)findViewById(R.id.hourET);
-        minuteET = (EditText)findViewById(R.id.minuteET);
-        secondET = (EditText)findViewById(R.id.secondET);
         hourTV = (TextView)findViewById(R.id.hourTV);
         minuteTV = (TextView)findViewById(R.id.minuteTV);
         secondTV = (TextView)findViewById(R.id.secondTV);
         finishTV = (TextView)findViewById(R.id.finishTV);
         startBtn = (Button)findViewById(R.id.startBtn);
-        pauseBtn = (Button)findViewById(R.id.pauseBtn);
-        cancelBtn= (Button)findViewById(R.id.cancelBtn);
+        stopBtn = (Button)findViewById(R.id.btn_stop);
+        pauseBtn = (Button)findViewById(R.id.btn_pause);
+
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                timeCountSettingLV.setVisibility(View.GONE);
-                timeCountLV.setVisibility(View.VISIBLE);
-                hourTV.setText(hourET.getText().toString());
-                minuteTV.setText(minuteET.getText().toString());
-                secondTV.setText(secondET.getText().toString());
-                if (TextUtils.isEmpty(hourET.getText())){hour = 0;}
-                else{ hour = Integer.parseInt(hourET.getText().toString());}
-                if (TextUtils.isEmpty(minuteET.getText())){minute = 0;}
-                else{minute = Integer.parseInt(minuteET.getText().toString());}
-                if (TextUtils.isEmpty(secondET.getText())){second = 0;}
-                else{second = Integer.parseInt(secondET.getText().toString());}
+            public void onClick(View v) {
+                if(TextUtils.isEmpty(minuteTV.getText())){
+                    subject.setText("과목을 선택해주세요");}
+                else if ( TextUtils.isEmpty(subject.getText()) || subject.getText().toString() =="과목을 다시 선택해주세요"){
+                    subject.setText("과목을 다시 선택해주세요");}
+                else{
+                v.setVisibility(View.GONE);
+                stopBtn.setVisibility(View.VISIBLE);
                 pauseBtn.setVisibility(View.VISIBLE);
-                pauseBtn.setEnabled(true);
-                cancelBtn.setVisibility(View.VISIBLE);
-                cancelBtn.setEnabled(true);
-                startBtn.setVisibility(View.INVISIBLE);
-                startBtn.setEnabled(false);
-                Handler handler = new Handler(){
-                    public void handleMessage(Message msg){
-                        if(second != 0) {
-                            second--;
-                        } else if(minute != 0) {
-                            second = 60;
-                            second--;
-                            minute--;
-                        } else if(hour != 0) {
-                            second = 60;
-                            minute = 60;
-                            second--;
-                            minute--;
-                            hour--;
-                        }
-                        if(second <= 9){
-                            secondTV.setText("0" + second);
-                        } else {
-                            secondTV.setText(Integer.toString(second));
-                        }
-                        if(minute <= 9){
-                            minuteTV.setText("0" + minute);
-                        } else {
-                            minuteTV.setText(Integer.toString(minute));
-                        }
-                        if(hour <= 9){
-                            hourTV.setText("0" + hour);
-                        } else {
-                            hourTV.setText(Integer.toString(hour));
-                        }
-                        if(hour == 0 && minute == 0 && second == 0) {
-                            finishTV.setText("타이머가 종료되었습니다.");
-                            pauseBtn.setVisibility(View.INVISIBLE);
-                            pauseBtn.setEnabled(false);
-                            cancelBtn.setVisibility(View.INVISIBLE);
-                            cancelBtn.setEnabled(false);
-                            startBtn.setVisibility(View.VISIBLE);
-                            startBtn.setEnabled(true);
-                        }
-                    }
-                };
-                Timer timer = new Timer(true);
-                TimerTask timerTask = new TimerTask(){
-                    @Override public void run() {
-                        Message msg = handler.obtainMessage();
-                        handler.sendMessage(msg);
-                    }
+                pauseBtn.setText("일시정지");
+                isRunning = true;
 
-                    @Override
-                    public boolean cancel() {
-                        return super.cancel();
-                    }
-                };
-                timer.schedule(timerTask, 0, 1000);
-            }
+                timeThread = new Thread(new mockexamtimer.timeThread());
+                timeThread.start();
+            }}
 
         });
+        ko.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                if (!isRunning) {
+                    hourTV.setText("01");
+                    minuteTV.setText("20");
+                    secondTV.setText("00");
+                    subject.setText("국어");
+                }
+            }
+        });
+        ma.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                if (!isRunning) {
+                    hourTV.setText("01");
+                    minuteTV.setText("40");
+                    secondTV.setText("00");
+                    subject.setText("수학");
+                }
+            }
+        });
+        en.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                if (!isRunning) {
+                    hourTV.setText("01");
+                    minuteTV.setText("10");
+                    secondTV.setText("00");
+                    subject.setText("영어");
+                }
+            }
+        });
+        hi.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                if (!isRunning) {
+                    hourTV.setText("00");
+                    minuteTV.setText("30");
+                    secondTV.setText("00");
+                    subject.setText("한국사");
+                }
+            }
+        });
+        so.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                if (!isRunning) {
+                    hourTV.setText("00");
+                    minuteTV.setText("30");
+                    secondTV.setText("00");
+                    subject.setText("사회");
+                }
+            }
+        });
+        sc.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                if (!isRunning) {
+                    hourTV.setText("00");
+                    minuteTV.setText("30");
+                    secondTV.setText("00");
+                    subject.setText("과학");
+                }
+            }
+        });
+        pauseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isRunning = !isRunning;
+                if (isRunning) {
+                    pauseBtn.setText("일시정지");
+                } else {
+                    pauseBtn.setText("시작");
+                }
+            }
+        });
+
+        stopBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.setVisibility(View.GONE);
+                startBtn.setVisibility(View.VISIBLE);
+                pauseBtn.setVisibility(View.GONE);
+                timeThread.interrupt();
+                isRunning = Boolean.FALSE;
+                subject.setText("");
+            }
+        });
+
+    }
+    @SuppressLint("HandlerLeak")
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message m) {
+            int sec = (m.arg1 / 100) % 60;
+            int hour = (m.arg1 / 100) / 3600;
+            int min = (m.arg1 / 100) / 60 % 60;
+
+            if(min+sec+hour == 0){
+                hourTV.setText("00");
+                minuteTV.setText("00");
+                secondTV.setText("00");
+                timeThread.interrupt();
+            } else {
+                hourTV.setText(String.valueOf(hour));
+                minuteTV.setText(String.valueOf(min));
+                secondTV.setText(String.valueOf(sec));
+
+            }
+
+            }
+        };
+
+    public class timeThread implements Runnable {
+        @Override
+        public void run() {
+            int i = Integer.parseInt(hourTV.getText().toString())*360000 + Integer.parseInt(minuteTV.getText().toString())*6000 +Integer.parseInt(secondTV.getText().toString())*100;
+
+            while (true) {
+                while (isRunning) { //일시정지를 누르면 멈춤
+
+                    Message msg = new Message();
+                    msg.arg1 = i--;
+                    handler.sendMessage(msg);
+
+                    try {
+                        Thread.sleep(9);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        runOnUiThread(new Runnable(){
+                            @Override
+                            public void run() {
+                                hourTV.setText("00");
+                                minuteTV.setText("00");
+                                secondTV.setText("00");
+
+                            }
+                        });
+                        return; // 인터럽트 받을 경우 return
+                    }
+                }
+            }
+        }
     }
 }
