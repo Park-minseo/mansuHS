@@ -26,10 +26,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.CustomViewHold
         this.arrayList = arrayList;
 
     }
-//    public MainAdapter(Context context11)
-//    {
-//        context = context11;
-//    }
+//
     @NonNull
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

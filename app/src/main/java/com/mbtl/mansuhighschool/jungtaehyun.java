@@ -69,7 +69,7 @@ public class jungtaehyun extends AppCompatActivity {
     int year = now.get(Calendar.YEAR);
     int month = now.get(Calendar.MONTH) + 1;
     int day = now.get(Calendar.DAY_OF_MONTH);
-
+    String check = "";
     private void getWebsite(){
         Document doc = null;
 
@@ -90,7 +90,7 @@ public class jungtaehyun extends AppCompatActivity {
                         d = "0" + day;
                     }
                     else d = String.valueOf(day);
-                    Document doc = Jsoup.connect("https://news.naver.com/main/list.naver?mode=LS2D&sid2=250&sid1=102&mid=shm&date=" + year + m + 16 + "&page=" + a).get();
+                    Document doc = Jsoup.connect("https://news.naver.com/main/list.naver?mode=LS2D&sid2=250&sid1=102&mid=shm&date=" + year + m + d + "&page=" + a).get();
 
                     Object title = doc.select("body > div > table > tbody > tr > td > div > div > ul > li > dl > dt >a");
                     Object content = doc.select("body > div > table > tbody > tr > td > div > div > ul > li > dl > dd > span");
@@ -127,7 +127,6 @@ public class jungtaehyun extends AppCompatActivity {
                         String[] Content1234 = Content12.split("<span class=\"lede\">");
                         //간략 내용 관련
 
-                        try {
                             for (i = 0, asdf = 1, img = 2; i <= 19; i++, asdf = asdf + 1, img++) {  //이거 아예 다시 해야함
                                 String img_title = install[i];
                                 String[] newstitle = img_title.split("\">");
@@ -151,6 +150,17 @@ public class jungtaehyun extends AppCompatActivity {
                                     imgreal = "";//이거 없는 이미지 설정하삼
                                 }
 
+                                if (check == imgreal)
+                                {
+                                    a = 1;
+                                    day = day-1;
+                                    if (day <= 0)
+                                    {
+                                        day = 29;
+                                        month = month-1;
+                                    }
+                                }
+                                check = imgreal;
                                 String contentsp = Content1234[asdf];
                                 String[] contentreal = contentsp.split("<span class=\"writing\">");
                                 //간략 내용 관련
@@ -159,20 +169,10 @@ public class jungtaehyun extends AppCompatActivity {
                                 arrayList.add(mainData);
                                 mainAdapter.notifyDataSetChanged();
                             }
+
+
                         }
-                        catch (ArrayIndexOutOfBoundsException e)
-                        {
-                            a=1;
-                            if (day > 1){
-                                day = day-1;
-                            }
-                            else
-                                {
-                                    month = month-1;
-                                }
-                            getWebsite();
-                        }
-                    }
+
 
                 });
 
