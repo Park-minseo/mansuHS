@@ -26,15 +26,12 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.CustomViewHold
         this.arrayList = arrayList;
 
     }
-    public MainAdapter(Context context11)
-    {
-        context = context11;
-    }
+//
     @NonNull
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-//        Fresco.initialize(parent.getContext());          // 이거를 해야 링크를 이미지로 변환 가능
+        Fresco.initialize(parent.getContext());          // 이거를 해야 링크를 이미지로 변환 가능
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list,parent,false);
         CustomViewHolder holder = new CustomViewHolder(view);
@@ -51,8 +48,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.CustomViewHold
         holder.tv_content.setText(arrayList.get(position).getTv_content());
         holder.bon_moon.setText(arrayList.get(position).getBon_moon());
 
-//        Uri uri = Uri.parse(arrayList.get(position).getIv_profile()); // 링크를 이미지로 변형
-//        holder.iv_profile.setImageURI(uri);
+        Uri uri = Uri.parse(arrayList.get(position).getIv_profile()); // 링크를 이미지로 변형
+        holder.iv_profile.setImageURI(uri);
+
 
 
         holder.itemView.setTag(position);
@@ -67,7 +65,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.CustomViewHold
                 Uri urI = Uri.parse(bon_moon);
                 Intent intent = new Intent(Intent.ACTION_VIEW, urI);
                 v.getContext().startActivity(intent);
-//                context.startActivity(intent);        //액티비티 이동
 
             }
         });
@@ -81,14 +78,14 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.CustomViewHold
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
-        protected ImageView iv_profile;
+        protected SimpleDraweeView iv_profile;
         protected TextView tv_name;
         protected TextView tv_content;
         protected TextView bon_moon;
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.iv_profile = (ImageView) itemView.findViewById(R.id.iv_profile);
+            this.iv_profile = (SimpleDraweeView) itemView.findViewById(R.id.iv_profile);
             this.tv_name = (TextView)  itemView.findViewById(R.id.tv_name);
             this.tv_content = (TextView)  itemView.findViewById(R.id.tv_content);
             this.bon_moon = (TextView) itemView.findViewById(R.id.bon_moon);

@@ -69,7 +69,7 @@ public class jungtaehyun extends AppCompatActivity {
     int year = now.get(Calendar.YEAR);
     int month = now.get(Calendar.MONTH) + 1;
     int day = now.get(Calendar.DAY_OF_MONTH);
-
+    String check = "";
     private void getWebsite(){
         Document doc = null;
 
@@ -80,8 +80,8 @@ public class jungtaehyun extends AppCompatActivity {
                 StringBuilder builderC = new StringBuilder();
                 StringBuilder builderI = new StringBuilder();
                 try {
-                    String m = " ";
-                    String d = " ";
+                    String m = "";
+                    String d = "";
                     if (month < 10) {
                         m = "0" + month;
                     }
@@ -126,8 +126,9 @@ public class jungtaehyun extends AppCompatActivity {
                         String Content12 = Content123.replace("</span>","");
                         String[] Content1234 = Content12.split("<span class=\"lede\">");
                         //간략 내용 관련
+                            try {
 
-                        try {
+
                             for (i = 0, asdf = 1, img = 2; i <= 19; i++, asdf = asdf + 1, img++) {  //이거 아예 다시 해야함
                                 String img_title = install[i];
                                 String[] newstitle = img_title.split("\">");
@@ -148,33 +149,38 @@ public class jungtaehyun extends AppCompatActivity {
                                     String[] bon_moon = link.split("\">");
                                     link = bon_moon[0];                                             // 사진이 없을 경우의 본문 링크
                                     link = link.replace("amp;","");
-                                    imgreal = "https://imgnews.pstatic.net/image/origin/022/2021/10/22/3630904.jpg";//이거 없는 이미지 설정하삼
+                                    imgreal = "";//이거 없는 이미지 설정하삼
                                 }
 
+                                if (check == imgreal)
+                                {
+                                    a = 1;
+                                    day = day-1;
+                                    if (day <= 0)
+                                    {
+                                        day = 29;
+                                        month = month-1;
+                                        getWebsite();
+                                    }
+                                    getWebsite();
+                                }
+                                check = imgreal;
                                 String contentsp = Content1234[asdf];
                                 String[] contentreal = contentsp.split("<span class=\"writing\">");
                                 //간략 내용 관련
                                 String fax = newstitle[1];
                                 MainData mainData = new MainData(imgreal, fax, contentreal[0],link);
                                 arrayList.add(mainData);
-                                mainAdapter.notifyDataSetChanged();
+                                mainAdapter.notifyDataSetChanged();}
                             }
-                        }
-                        catch (ArrayIndexOutOfBoundsException e)
-                        {
-                            a=1;
-                            if (day > 1){
-                                day = day-1;
-                            }
-                            else
+                                catch (ArrayIndexOutOfBoundsException e)
                                 {
-                                    month = month-1;
+//                                    check = imgreal;
+                                    getWebsite();
                                 }
-                            getWebsite();
+
                         }
-                        //할일 : 사진 받아오기 , 영상 보고 롱클릭 리스너로 webview 통해서 링크 연결하기
-                        //context 오류남 영상보고 어댑터 고쳐야 할 듯
-                    }
+
 
                 });
 
