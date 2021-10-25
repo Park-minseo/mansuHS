@@ -20,7 +20,7 @@ public class calculator4 extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calculator4);
 
-        input1 = findViewById(R.id.input1);
+        input1 = findViewById(R.id.innumber1);
         input2 = findViewById(R.id.input2);
         input3 = findViewById(R.id.input3);
         input4 = findViewById(R.id.input4);

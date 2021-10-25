@@ -36,9 +36,6 @@
             android:name=".time"
             android:exported="true" />
         <activity
-            android:name=".calculator3"
-            android:exported="true" />
-        <activity
             android:name=".calculator2"
             android:exported="true" />
         <activity

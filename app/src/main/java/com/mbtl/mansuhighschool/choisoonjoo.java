@@ -19,7 +19,6 @@ public class choisoonjoo extends AppCompatActivity {
         Button calculator1=findViewById(R.id.tnseo1);
         Button calculator2=findViewById(R.id.tnseo2);
         Button calculator3=findViewById(R.id.tnseo3);
-        Button calculator4=findViewById(R.id.tnseo4);
         calculator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,13 +41,6 @@ public class choisoonjoo extends AppCompatActivity {
             }
         });
         calculator3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), calculator3.class);
-                startActivity(intent);
-            }
-        });
-        calculator4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), calculator4.class);

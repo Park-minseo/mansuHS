@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/input1"
+        android:id="@+id/innumber1"
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:gravity="center"
@@ -44,7 +44,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input1" />
+        app:layout_constraintTop_toBottomOf="@+id/innumber1" />
 
     <EditText
         android:id="@+id/input3"
