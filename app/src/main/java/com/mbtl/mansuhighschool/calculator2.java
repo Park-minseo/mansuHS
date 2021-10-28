@@ -1,9 +1,7 @@
 package com.mbtl.mansuhighschool;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -20,13 +18,6 @@ public class calculator2 extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calculator2);
-
-        log = findViewById(R.id.log);
-        jisu = findViewById(R.id.jisu);
-        answer = findViewById(R.id.answer);
-        input_value1 = findViewById(R.id.input_value1);
-        input_value2 = findViewById(R.id.input_value2);
-
 
         log.setOnClickListener(new View.OnClickListener() {
             @Override

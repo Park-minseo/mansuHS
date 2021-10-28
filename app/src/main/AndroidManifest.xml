@@ -12,6 +12,15 @@
         android:theme="@style/Theme.MansuHS"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".gongji"
+            android:exported="true" />
+        <activity
+            android:name=".haksa"
+            android:exported="true" />
+        <activity
+            android:name=".gajung"
+            android:exported="true" />
+        <activity
             android:name=".calculator4"
             android:exported="true" />
         <activity
@@ -87,8 +96,8 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
