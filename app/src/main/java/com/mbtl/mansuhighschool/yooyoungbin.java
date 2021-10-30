@@ -1,7 +1,10 @@
 package com.mbtl.mansuhighschool;
 
+import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -10,12 +13,19 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.bumptech.glide.Glide;
+
 public class yooyoungbin extends AppCompatActivity {
 
     int i = 1;
     public void print(){
         Toast.makeText(getApplicationContext(), "이동할 수 없습니다.", Toast.LENGTH_SHORT).show();
     }
+
+    ImageView imageview, ima;
+    String imgUrl = "https://i.ibb.co/4TVZNM3/s1.png";
+    Bitmap bmImg;
+    int width, height;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,33 +38,46 @@ public class yooyoungbin extends AppCompatActivity {
         Button right = findViewById(R.id.right);
         Button down = findViewById(R.id.down);
         Button left = findViewById(R.id.left);
-        ImageView img = (ImageView)findViewById(R.id.image);
-        int[] images = new int[26];
-        images[1] = R.drawable.m1;
-        images[2] = R.drawable.m2;
-        images[3] = R.drawable.m3;
-        images[4] = R.drawable.m4;
-        images[5] = R.drawable.m5;
-        images[6] = R.drawable.m6;
-        images[7] = R.drawable.m7;
-        images[8] = R.drawable.m8;
-        images[9] = R.drawable.m9;
-        images[10] = R.drawable.m10;
-        images[11] = R.drawable.m11;
-        images[12] = R.drawable.m12;
-        images[13] = R.drawable.m13;
-        images[14] = R.drawable.m14;
-        images[15] = R.drawable.m15;
-        images[16] = R.drawable.m16;
-        images[17] = R.drawable.m17;
-        images[18] = R.drawable.m18;
-        images[19] = R.drawable.m19;
-        images[20] = R.drawable.m20;
-        images[21] = R.drawable.m21;
-        images[22] = R.drawable.m22;
-        images[23] = R.drawable.m23;
-        images[24] = R.drawable.m24;
-        images[25] = R.drawable.m25;
+        imageview =  (ImageView) findViewById(R.id.image);
+        ima = (ImageView) findViewById(R.id.image1);
+        Display display = getWindowManager().getDefaultDisplay();  // in Activity
+        /* getActivity().getWindowManager().getDefaultDisplay() */ // in Fragment
+        Point size = new Point();
+        display.getRealSize(size); // or getSize(size)
+        width = size.x;
+        height = size.y;
+
+        ima.setVisibility(View.INVISIBLE);
+        String[] images=new String[26];
+        images[1] = "https://i.ibb.co/gFB2CkS/m1.jpg";
+        images[2] = "https://i.ibb.co/T2WGD9f/m2.jpg";
+        images[3] = "https://i.ibb.co/r7K268P/m3.jpg";
+        images[4] = "https://i.ibb.co/z5DRpnG/m4.jpg";
+        images[5] = "https://i.ibb.co/pXp0xsS/m5.jpg";
+        images[6] = "https://i.ibb.co/jhxqzLr/m6.jpg";
+        images[7] = "https://i.ibb.co/5W5vKy1/m7.jpg";
+        images[8] = "https://i.ibb.co/YDPrNFv/m8.jpg";
+        images[9] = "https://i.ibb.co/17FZcVv/m9.jpg";
+        images[10] = "https://i.ibb.co/9bHqZ5C/m10.jpg";
+        images[11] = "https://i.ibb.co/7yfQp2n/m11.jpg";
+        images[12] = "https://i.ibb.co/34GvG3G/m12.jpg";
+        images[13] = "https://i.ibb.co/p367Xcp/m13.jpg";
+        images[14] = "https://i.ibb.co/VmtXw4D/m14.jpg";
+        images[15] = "https://i.ibb.co/HhD66CV/m15.jpg";
+        images[16] = "https://i.ibb.co/86JyrCd/m16.jpg";
+        images[17] = "https://i.ibb.co/1nVvhbt/m17.jpg";
+        images[18] = "https://i.ibb.co/zNyYrCr/m18.jpg";
+        images[19] = "https://i.ibb.co/vBJSwLv/m19.jpg";
+        images[20] = "https://i.ibb.co/m8FR4Ky/m20.jpg";
+        images[21] = "https://i.ibb.co/nkGcJVs/m21.jpg";
+        images[22] = "https://i.ibb.co/zf3vQQr/m22.jpg";
+        images[23] = "https://i.ibb.co/ZxyFbtQ/m23.jpg";
+        images[24] = "https://i.ibb.co/nb48FXn/m24.jpg";
+        images[25] = "https://i.ibb.co/K7fCc8s/m25.jpg";
+
+
+
+        Glide.with(yooyoungbin.this).load(images[1]).into(imageview);
 
         up.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,20 +85,20 @@ public class yooyoungbin extends AppCompatActivity {
                 int m = i % 6;
                 if(m != 0){
                     if(i==25){
-                        print();
+
                     }
                     else{
                         i += 1;
-                        img.setImageResource(images[i]);
+                        Glide.with(yooyoungbin.this).load(images[i]).override(1280, 720).into(imageview);
                     }
                 }
                 else if(i == 18){
                     i += 1;
-                    img.setImageResource(images[i]);
+                    Glide.with(yooyoungbin.this).load(images[i]).override(1280, 720).into(imageview);
                 }
                 else if(i == 24) {
                     i += 1;
-                    img.setImageResource(images[i]);
+                    Glide.with(yooyoungbin.this).load(images[i]).override(1280, 720).into(imageview);
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "이동할 수 없습니다.", Toast.LENGTH_SHORT).show();
@@ -98,17 +121,17 @@ public class yooyoungbin extends AppCompatActivity {
                     }
                     else {
                         i -= 1;
-                        img.setImageResource(images[i]);
+                        Glide.with(yooyoungbin.this).load(images[i]).override(1280, 720).into(imageview);
                         Log.i("d", "" + i);
                     }
                 }
                 else if(i == 19){
                     i -= 1;
-                    img.setImageResource(images[i]);
+                    Glide.with(yooyoungbin.this).load(images[i]).override(1280, 720).into(imageview);
                 }
                 else if(i == 25) {
                     i -= 1;
-                    img.setImageResource(images[i]);
+                    Glide.with(yooyoungbin.this).load(images[i]).override(1280, 720).into(imageview);
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "이동할 수 없습니다.", Toast.LENGTH_SHORT).show();
@@ -121,7 +144,7 @@ public class yooyoungbin extends AppCompatActivity {
             public void onClick(View view) {
                 if(i <=12){
                     i += 6;
-                    img.setImageResource(images[i]);
+                    Glide.with(yooyoungbin.this).load(images[i]).override(1280, 720).into(imageview);
                     Log.i("d",""+i);
                 }
                 else{
@@ -135,7 +158,7 @@ public class yooyoungbin extends AppCompatActivity {
                 if(i>=7){
                     if(i<=18){
                         i -= 6;
-                        img.setImageResource(images[i]);
+                        Glide.with(yooyoungbin.this).load(images[i]).override(1280, 720).into(imageview);
                         Log.i("d",""+i);
                     }
                     else{
@@ -150,5 +173,7 @@ public class yooyoungbin extends AppCompatActivity {
 
 
 
-    }
-}
+
+
+    }}
+
