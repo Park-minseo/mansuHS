@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ScrollView1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -20,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/math1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -33,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textview"
         app:srcCompat="@drawable/resource__" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/math2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -46,7 +53,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textview"
         app:srcCompat="@drawable/_1" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/math3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -91,7 +98,7 @@
         android:layout_height="100dp"
         android:layout_marginStart="20dp"
         android:gravity="center"
-        android:text="계산 할 항 :"
+        android:text="n :"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintStart_toStartOf="parent"
@@ -99,3 +106,4 @@
         app:layout_constraintVertical_bias="0.433" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -2,16 +2,16 @@ package com.mbtl.mansuhighschool;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class calculator2 extends AppCompatActivity{
 
-    TextView log,answer;
-    ImageView ax;
+    TextView log, answer;
+    Button ax, logb;
     EditText input_value1,input_value2;
     int a,b,c,d=0;
 
@@ -20,13 +20,13 @@ public class calculator2 extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calculator2);
 
-        log = findViewById(R.id.log);
+        logb = findViewById(R.id.logb);
         answer = findViewById(R.id.answer);
-        ax = findViewById(R.id.ax);
+        ax = findViewById(R.id.button);
         input_value1 = findViewById(R.id.input_value1);
         input_value2 = findViewById(R.id.input_value2);
 
-        log.setOnClickListener(new View.OnClickListener(){
+        logb.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick (View view)
             {

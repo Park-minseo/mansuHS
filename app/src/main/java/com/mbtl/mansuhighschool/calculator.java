@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class calculator extends AppCompatActivity
 {
-    Button sum_value,mp,sum;
+    Button mp,sum;
     TextView value;
     EditText put_value,put_value2,put_value3;
 
@@ -26,7 +26,6 @@ public class calculator extends AppCompatActivity
 
         sum = findViewById(R.id.button10);
         mp = findViewById(R.id.button11);
-        sum_value = findViewById(R.id.sum_value);
 
         value = findViewById(R.id.value);
 
@@ -45,7 +44,7 @@ public class calculator extends AppCompatActivity
                 if (TextUtils.isEmpty(put_value3.getText())){value3 = 0;}
                 else{value3= Integer.parseInt(put_value3.getText().toString());}
 
-                int answer = value3*(2*value1 + (value1-1)*value2) / 2;
+                int answer = ((2 * value1 + (value3 - 1) *value2) * value3) / 2;
                 value.setText(String.valueOf(answer));
             }
         });
@@ -61,16 +60,18 @@ public class calculator extends AppCompatActivity
                 if (TextUtils.isEmpty(put_value3.getText())){value3 = 0;}
                 else{value3= Integer.parseInt(put_value3.getText().toString());}
                 int finalanswer = 0;
+                int d = (int) Math.pow(value2, value3);
                 if (value2 < 1 && value2 >-1)
                 {
-                    double answer = value1*(1-Math.pow(value2, value3)) / (1-value2);
-                    finalanswer = (int) Math.round(answer);
+                    double answer = (value1*(1-d)) / (1-value2);
+                    finalanswer = Integer.parseInt(String.valueOf(Math.round(answer)));
                 }
                 else
                 {
-                    double answer = value1*(Math.pow(value2, value3)-1) / (value2-1);
-                    finalanswer = (int) Math.round(answer);
+                    double answer = (value1*(d-1)) / (value2-1);
+                    finalanswer = Integer.parseInt(String.valueOf(Math.round(answer)));
                 }
+
                 value.setText(String.valueOf(finalanswer));
             }
         });

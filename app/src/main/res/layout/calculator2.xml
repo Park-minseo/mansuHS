@@ -1,9 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ScrollView1"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="140dp"
+        android:layout_height="59dp"
+        android:layout_marginBottom="32dp"
+        android:text="지수 계산"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.184"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/logb"
+        android:layout_width="140dp"
+        android:layout_height="59dp"
+        android:layout_marginBottom="32dp"
+        android:text="로그 계산"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.815"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/input_value1"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/ax"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
         android:id="@+id/input_value2"
@@ -17,30 +58,13 @@
         app:layout_constraintTop_toBottomOf="@+id/input_value1"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="40dp"
-        android:gravity="center"
-        android:text="밑,진수 입력 후 계산 선택"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/log"
+    <ImageView
+        android:id="@+id/ax"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginStart="40dp"
         android:layout_marginTop="60dp"
-        android:gravity="center"
-        android:text="Log"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <TextView
@@ -67,16 +91,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
-    <EditText
-        android:id="@+id/input_value1"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/log"
+        android:layout_width="150dp"
         android:layout_height="50dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="60dp"
-        android:layout_marginEnd="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView17"
-        app:layout_constraintTop_toBottomOf="@+id/ax"
-        tools:ignore="SpeakableTextPresentCheck" />
+        android:gravity="center"
+        android:text=""
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <TextView
         android:id="@+id/answer"
@@ -92,4 +117,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_value2" />
 
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="480dp"
+        android:gravity="center"
+        android:text="밑,진수 입력 후 계산"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

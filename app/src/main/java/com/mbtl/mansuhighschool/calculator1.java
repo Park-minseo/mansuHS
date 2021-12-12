@@ -1,17 +1,16 @@
 package com.mbtl.mansuhighschool;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class calculator1 extends AppCompatActivity{
 
-    ImageView math1,math2,math3;
+    ImageButton math1,math2,math3;
     EditText input;
     TextView textview3;
     int a,b,c;
